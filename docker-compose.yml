@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  app:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    image: fight
+    container_name: fight-spgk
+    deploy:
+      replicas: 10
