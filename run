@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker build -t fight-spgk:1 .
+docker run -d --name fight fight-spgk:1
